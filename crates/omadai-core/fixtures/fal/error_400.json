@@ -1,0 +1,6 @@
+{
+  "error": {
+    "type": "validation_error",
+    "message": "expand must include time_series or summary"
+  }
+}

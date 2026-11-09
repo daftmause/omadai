@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "daftmause.omadai",
+  "name": "omadai",
+  "version": "0.1.0",
+  "author": "daftmause",
+  "license": "MIT",
+  "description": "AI API spend in dollars, per platform and per key.",
+  "kinds": ["bar-widget"],
+  "activation": "on-demand",
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "omadai",
+    "description": "AI API spend in dollars, per platform and per key, in a bar panel and an app window.",
+    "category": "AI",
+    "aliases": ["omadai", "ai-spend"],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshMinutes": "60",
+      "platformOrder": []
+    },
+    "schema": [
+      { "key": "refreshMinutes", "type": "enum", "label": "Refresh interval (minutes)", "options": ["15", "30", "60", "180", "360"], "defaultValue": "60" }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Incorrect API key provided: {KEY}. You can find your API key at the dashboard.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "invalid_api_key"
+  }
+}

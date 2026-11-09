@@ -1,0 +1,10 @@
+{
+  "object": "list",
+  "data": [
+    { "object": "organization.admin_api_key", "id": "key_fk_alpha", "name": "Admin reporting", "redacted_value": "fk-adm...abc" },
+    { "object": "organization.admin_api_key", "id": "key_fk_unused", "name": "Old admin", "redacted_value": "fk-adm...def" }
+  ],
+  "has_more": false,
+  "first_id": "key_fk_alpha",
+  "last_id": "key_fk_unused"
+}

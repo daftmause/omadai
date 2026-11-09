@@ -1,0 +1,5 @@
+target/
+apps/macos/node_modules/
+apps/macos/dist/
+apps/macos/src-tauri/target/
+apps/macos/src-tauri/gen/

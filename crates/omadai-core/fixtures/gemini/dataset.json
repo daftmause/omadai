@@ -1,0 +1,1 @@
+{"kind":"bigquery#dataset","id":"example-studio-1234:billing_export","datasetReference":{"datasetId":"billing_export","projectId":"example-studio-1234"},"location":"US","type":"DEFAULT"}

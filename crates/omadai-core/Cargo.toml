@@ -1,0 +1,22 @@
+[package]
+name = "omadai-core"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[features]
+# Selects the in-memory keystore in place of the OS keyring; enabled only through the omadai crate's dev-dependency.
+test-fakes = []
+
+[dependencies]
+hmac = { version = "0.13", default-features = false, features = ["zeroize"] }
+rust_decimal = { version = "1.43", default-features = false, features = ["std", "serde", "serde-with-arbitrary-precision"] }
+serde = { version = "1", default-features = false, features = ["std", "derive"] }
+serde_json = { version = "1", default-features = false, features = ["std", "arbitrary_precision"] }
+sha2 = { version = "0.11", default-features = false, features = ["zeroize"] }
+toml = { version = "1.2", default-features = false, features = ["std", "serde", "parse", "display"] }
+ureq = { version = "3.5", default-features = false, features = ["rustls"] }
+zeroize = { version = "1.9", default-features = false, features = ["alloc"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+secret-service = { version = "5.2", default-features = false, features = ["rt-async-io-crypto-rust"] }

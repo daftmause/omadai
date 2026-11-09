@@ -1,0 +1,30 @@
+{
+  "changes": [
+    {
+      "teamId": "00000000-fk00-4000-8000-000000000001",
+      "changeOrigin": "PURCHASE",
+      "topupStatus": "SUCCEEDED",
+      "amount": { "val": "-5000" },
+      "invoiceId": "fk-invoice-1",
+      "invoiceNumber": "000-000-001",
+      "createTime": "2026-09-01T10:00:00.000000Z"
+    },
+    {
+      "teamId": "00000000-fk00-4000-8000-000000000001",
+      "changeOrigin": "SPEND",
+      "amount": { "val": "1500" },
+      "spendBpKeyYear": 2026,
+      "spendBpKeyMonth": 9,
+      "createTime": "2026-10-02T03:00:00.000000Z"
+    },
+    {
+      "teamId": "00000000-fk00-4000-8000-000000000001",
+      "changeOrigin": "SPEND",
+      "amount": { "val": "1000" },
+      "spendBpKeyYear": 2026,
+      "spendBpKeyMonth": 10,
+      "createTime": "2026-11-02T03:00:00.000000Z"
+    }
+  ],
+  "total": { "val": "-2500" }
+}

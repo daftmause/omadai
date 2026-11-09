@@ -1,0 +1,62 @@
+{
+  "app": "omadai",
+  "host": "bun",
+  "parts": [
+    "core",
+    "macos"
+  ],
+  "verbs": [
+    {
+      "name": "setup",
+      "category": "workflow",
+      "args": [],
+      "examples": [
+        "bin/omadai setup",
+        "bin/omadai setup core"
+      ],
+      "parts": [
+        "core",
+        "macos"
+      ],
+      "summary": "Install into the repository: cargo fetch and bun install --cwd cli (this CLI's own type packages) for core, and for macos bun install --frozen-lockfile in apps/macos from its committed bun.lock (refusing where it is missing) plus cargo fetch --locked for apps/macos/src-tauri. Safe to rerun."
+    },
+    {
+      "name": "build",
+      "category": "workflow",
+      "args": [],
+      "examples": [
+        "bin/omadai build"
+      ],
+      "summary": "Build the product binary target/release/omadai with cargo build --release --workspace. The macOS app's build is not behind this verb yet."
+    },
+    {
+      "name": "doctor",
+      "category": "quality",
+      "args": [],
+      "examples": [
+        "bin/omadai doctor"
+      ],
+      "summary": "Read-only health check of the development toolchain: rustc, cargo, rustfmt, clippy and bun versions, whether omarchy-plugin-validate is on PATH and /usr/lib/qt6/bin/qmllint exists, and whether cli/node_modules and apps/macos/node_modules exist. Changes nothing and does not run the product's own omadai doctor."
+    },
+    {
+      "name": "check",
+      "category": "quality",
+      "args": [],
+      "examples": [
+        "bin/omadai check"
+      ],
+      "summary": "Static and test gate for the Rust workspace and the plugin: typecheck the CLI, then cargo fmt --check, cargo clippy --workspace --all-targets -- -D warnings, cargo test --workspace, and omarchy-plugin-validate on a temporary directory holding only manifest.json and Panel.qml (the repository root holds node_modules symlinks the validator refuses), then /usr/lib/qt6/bin/qmllint on Panel.qml, with a temporary import directory whose qs entry links to /usr/share/omarchy/shell so the qs.Commons and qs.Ui imports resolve, since the validator checks only the manifest; installs nothing and stops at the first failing step. apps/macos/src-tauri is outside the workspace and is not checked."
+    },
+    {
+      "name": "plugin-dev",
+      "category": "external",
+      "args": [
+        "[--dry-run]"
+      ],
+      "examples": [
+        "bin/omadai plugin-dev --dry-run"
+      ],
+      "summary": "Install this checkout's plugin files (manifest.json, Panel.qml) as $HOME/.config/omarchy/plugins/daftmause.omadai/: copy them to a new, uniquely named staging directory in $HOME/.config/omarchy/, outside the plugins/ tree the shell watches, run omarchy-plugin-validate on it, then swap it in with one atomic rename (mv -T --exchange where the destination exists, mv -T where it does not), so the shell never sees a partial plugin (a reinstalled Panel.qml takes effect after omarchy-restart-shell), and delete the displaced tree only after the swap succeeded. On any failure it removes only the staging directory. Refuses, changing nothing, where the destination is a git checkout, holds a file other than those two, or holds a manifest.json or Panel.qml matching neither the checkout nor the digest saved at the last successful plugin-dev, so an omarchy plugin add install or a hand edit there is never lost; --dry-run prints the paths and the steps. Writes outside the repository."
+    }
+  ]
+}

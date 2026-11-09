@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "starting_at": "2026-10-31T00:00:00Z",
+      "ending_at": "2026-11-01T00:00:00Z",
+      "group": { "api_key_id": "apikey_fk_one" },
+      "cost": { "amount": "10.000000", "list_amount": "12.000000", "currency": "USD", "requests": 3 }
+    },
+    {
+      "starting_at": "2026-10-31T00:00:00Z",
+      "ending_at": "2026-11-01T00:00:00Z",
+      "group": { "api_key_id": null },
+      "cost": { "amount": "1234.567800", "list_amount": "1234.567800", "currency": "USD", "requests": null }
+    }
+  ],
+  "data_refreshed_at": "2026-12-02T20:00:00Z",
+  "has_more": false,
+  "next_page": null
+}

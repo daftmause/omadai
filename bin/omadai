@@ -1,0 +1,53 @@
+#!/bin/sh
+set -e
+self=$0
+# Follow a symlink by hand, since BSD readlink has no -f, so a link on PATH still finds this repository.
+while [ -L "$self" ]; do
+  link=$(readlink -- "$self")
+  case $link in /*) self=$link ;; *) self=$(dirname -- "$self")/$link ;; esac
+done
+root=$(CDPATH='' cd -- "$(dirname -- "$self")/.." && pwd)
+# Only a pin in the repo root sends bun through mise, which runs from the root, so a sh -c restores the caller's directory.
+# mise reads .bun-version only where a setting enables it, so that pin is passed as bun@<version> unless mise already takes bun from a file in the repo.
+mise='' spec=''
+if command -v mise >/dev/null 2>&1; then
+  # The project files mise loads, from its configuration docs and checked against mise 2026.9.5, which ignores .rtx.toml and mise.<env>.toml without MISE_ENV.
+  for pin in "$root"/mise.toml "$root"/.mise.toml "$root"/mise.local.toml "$root"/.mise.local.toml "$root"/.config/mise.toml \
+      "$root"/.config/mise.local.toml "$root"/.config/mise/mise.toml "$root"/.tool-versions "$root"/.bun-version; do
+    [ -f "$pin" ] && mise=1
+  done
+  for dir in "$root"/mise "$root"/.mise "$root"/.config/mise; do
+    for pin in "$dir"/config.toml "$dir"/config.local.toml "$dir"/conf.d/*.toml "$dir"/conf.d/*/mise.toml "$dir"/conf.d/*/mise.local.toml; do
+      [ -f "$pin" ] && mise=1
+    done
+  done
+  # Each MISE_ENV entry adds its own files beside the base ones, as mise 2026.9.5 loads them.
+  for env in $(printf '%s' "${MISE_ENV:-}" | tr ',' ' '); do
+    for pin in "$root"/mise."$env".toml "$root"/.mise."$env".toml "$root"/mise."$env".local.toml "$root"/.mise."$env".local.toml \
+        "$root"/.config/mise."$env".toml "$root"/.config/mise."$env".local.toml "$root"/mise/config."$env".toml \
+        "$root"/mise/config."$env".local.toml "$root"/.mise/config."$env".toml "$root"/.mise/config."$env".local.toml \
+        "$root"/.config/mise/config."$env".toml "$root"/.config/mise/config."$env".local.toml; do
+      [ -f "$pin" ] && mise=1
+    done
+  done
+  if [ -f "$root/.bun-version" ]; then
+    if listed=$(mise -C "$root" ls --current --json bun 2>&1); then
+      source=$(printf '%s\n' "$listed" | awk '/"source"/ { s = 1 } s && /"path"/ { sub(/.*"path"[[:space:]]*:[[:space:]]*"/, ""); sub(/".*/, ""); print; exit }')
+      case $source in
+        "$root"/* | "$(cd "$root" && pwd -P)"/*) ;;
+        *)
+          spec=$(sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/^bun-//' -e 's/[[:space:]].*//' -e '/^$/d' "$root/.bun-version" | sed -n 1p)
+          [ -n "$spec" ] || { echo "${self##*/}: .bun-version names no version" >&2; exit 3; }
+          spec=bun@$spec ;;
+      esac
+    else
+      # A failed lookup, an untrusted config for one, overrides nothing, so the repo's own config still decides.
+      printf '%s\n' "$listed" >&2
+    fi
+  fi
+fi
+if [ -n "$mise" ]; then
+  # shellcheck disable=SC2016 # the sh -c script expands in the child, not here
+  exec mise -C "$root" exec ${spec:+"$spec"} -- sh -c 'cd -- "$1" && shift && exec "$@"' sh "$PWD" bun "$root/cli/main.ts" "$@"
+fi
+exec bun "$root/cli/main.ts" "$@"

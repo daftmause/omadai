@@ -1,0 +1,55 @@
+{
+  "has_more": true,
+  "next_cursor": "Mg==",
+  "summary": [
+    {
+      "endpoint_id": "fal-ai/example-model",
+      "unit": "image",
+      "quantity": 30,
+      "unit_price": 0.025,
+      "cost_subtotal": 1.04,
+      "cost_discount": 0.25,
+      "cost_total": 0.79,
+      "cost": 0.79,
+      "currency": "USD",
+      "auth_method_structured": { "detail": "Key 1", "api_key_id": "fk_key_a" }
+    }
+  ],
+  "time_series": [
+    {
+      "bucket": "2026-10-03T00:00:00+00:00",
+      "results": [
+        {
+          "endpoint_id": "fal-ai/example-model",
+          "unit": "image",
+          "quantity": 40,
+          "unit_price": 0.025,
+          "percent_discount": 25,
+          "cost_subtotal": 1.0,
+          "cost_discount": 0.25,
+          "cost_total": 0.75,
+          "cost": 0.75,
+          "currency": "USD",
+          "auth_method_structured": { "detail": "Key 1", "api_key_id": "fk_key_a" }
+        },
+        {
+          "endpoint_id": "fal-ai/example-video",
+          "unit": "second",
+          "quantity": 2,
+          "unit_price": 0.02,
+          "percent_discount": null,
+          "cost_subtotal": 0.04,
+          "cost_discount": 0,
+          "cost_total": 0.04,
+          "cost": 0.04,
+          "currency": "USD",
+          "auth_method_structured": { "detail": "Key 2", "api_key_id": "fk_key_b" }
+        }
+      ]
+    },
+    {
+      "bucket": "2026-10-10T00:00:00+00:00",
+      "results": []
+    }
+  ]
+}

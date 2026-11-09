@@ -1,0 +1,53 @@
+{
+  "object": "page",
+  "has_more": true,
+  "next_page": "fk_page_2==",
+  "data": [
+    {
+      "object": "bucket",
+      "start_time": 1793491200,
+      "end_time": 1793577600,
+      "start_time_iso": "2026-11-01T00:00:00+00:00",
+      "end_time_iso": "2026-11-02T00:00:00+00:00",
+      "results": [
+        {
+          "object": "organization.costs.result",
+          "api_key_id": "key_fk_alpha",
+          "amount": { "value": 1.2345, "currency": "usd" },
+          "organization_id": "org-fk-example",
+          "organization_name": "Example Org"
+        }
+      ]
+    },
+    {
+      "object": "bucket",
+      "start_time": 1793577600,
+      "end_time": 1793664000,
+      "start_time_iso": "2026-11-02T00:00:00+00:00",
+      "end_time_iso": "2026-11-03T00:00:00+00:00"
+    },
+    {
+      "object": "bucket",
+      "start_time": 1793664000,
+      "end_time": 1793750400,
+      "start_time_iso": "2026-11-03T00:00:00+00:00",
+      "end_time_iso": "2026-11-04T00:00:00+00:00",
+      "results": [
+        {
+          "object": "organization.costs.result",
+          "api_key_id": "key_fk_alpha",
+          "amount": { "value": 2.0, "currency": "usd" },
+          "organization_id": "org-fk-example",
+          "organization_name": "Example Org"
+        },
+        {
+          "object": "organization.costs.result",
+          "api_key_id": "key_fk_beta",
+          "amount": { "value": 1, "currency": "usd" },
+          "organization_id": "org-fk-example",
+          "organization_name": "Example Org"
+        }
+      ]
+    }
+  ]
+}

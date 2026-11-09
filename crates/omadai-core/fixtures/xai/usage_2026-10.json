@@ -1,0 +1,20 @@
+{
+  "timeSeries": [
+    {
+      "group": ["fk-uuid-key-one"],
+      "groupLabels": ["Render (fk-...ab12)"],
+      "dataPoints": [
+        { "timestamp": "2026-10-02T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-10-03T00:00:00Z", "values": [6.00] }
+      ]
+    },
+    {
+      "group": ["fk-uuid-key-two"],
+      "groupLabels": ["Spare (fk-...cd34)"],
+      "dataPoints": [
+        { "timestamp": "2026-10-20T00:00:00Z", "values": [4.23] }
+      ]
+    }
+  ],
+  "limitReached": false
+}

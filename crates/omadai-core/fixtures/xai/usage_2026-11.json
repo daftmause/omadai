@@ -1,0 +1,27 @@
+{
+  "timeSeries": [
+    {
+      "group": ["fk-uuid-key-one"],
+      "groupLabels": ["Render (fk-...ab12)"],
+      "dataPoints": [
+        { "timestamp": "2026-11-01T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-02T00:00:00Z", "values": [0.75973725] },
+        { "timestamp": "2026-11-03T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-04T00:00:00Z", "values": [0.5] },
+        { "timestamp": "2026-11-05T00:00:00Z", "values": [0] }
+      ]
+    },
+    {
+      "group": ["fk-uuid-key-two"],
+      "groupLabels": ["Spare (fk-...cd34)"],
+      "dataPoints": [
+        { "timestamp": "2026-11-01T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-02T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-03T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-04T00:00:00Z", "values": [0] },
+        { "timestamp": "2026-11-05T00:00:00Z", "values": [0] }
+      ]
+    }
+  ],
+  "limitReached": false
+}

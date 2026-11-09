@@ -1,0 +1,20 @@
+{
+  "time_series": [
+    {
+      "bucket": "2026-10-20T00:00:00Z",
+      "results": [
+        {
+          "model": "higgsfield-ai/soul/v2/standard",
+          "unit": "generation",
+          "quantity": "1",
+          "unit_price": "0.0940",
+          "cost": "0.0940",
+          "currency": "USD"
+        }
+      ]
+    }
+  ],
+  "total": 3,
+  "page": 2,
+  "limit": 2
+}

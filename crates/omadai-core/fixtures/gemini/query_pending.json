@@ -1,0 +1,1 @@
+{"kind":"bigquery#queryResponse","jobReference":{"projectId":"example-studio-1234","jobId":"job_fk0001","location":"US"},"jobComplete":false}

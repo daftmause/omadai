@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Usage and cost data are available for the past year. Earliest supported start date: 2025-11-06 (UTC).",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "reporting_lookback_exceeded"
+  }
+}

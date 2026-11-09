@@ -1,0 +1,38 @@
+{
+  "object": "page",
+  "has_more": false,
+  "next_page": null,
+  "data": [
+    {
+      "object": "bucket",
+      "start_time": 1793750400,
+      "end_time": 1793836800,
+      "start_time_iso": "2026-11-04T00:00:00+00:00",
+      "end_time_iso": "2026-11-05T00:00:00+00:00",
+      "results": [
+        {
+          "object": "organization.costs.result",
+          "api_key_id": "key_fk_beta",
+          "amount": { "value": 0.1, "currency": "usd" },
+          "organization_id": "org-fk-example",
+          "organization_name": "Example Org"
+        },
+        {
+          "object": "organization.costs.result",
+          "api_key_id": null,
+          "amount": { "value": 0.02, "currency": "usd" },
+          "organization_id": "org-fk-example",
+          "organization_name": "Example Org"
+        }
+      ]
+    },
+    {
+      "object": "bucket",
+      "start_time": 1793836800,
+      "end_time": 1793923200,
+      "start_time_iso": "2026-11-05T00:00:00+00:00",
+      "end_time_iso": "2026-11-06T00:00:00+00:00",
+      "results": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "has_more": false,
+  "next_cursor": null,
+  "summary": [],
+  "time_series": [
+    {
+      "bucket": "2026-10-20T00:00:00+00:00",
+      "results": [
+        {
+          "endpoint_id": "fal-ai/example-model",
+          "unit": "image",
+          "quantity": 64,
+          "unit_price": 0.025,
+          "percent_discount": null,
+          "cost_subtotal": 1.6,
+          "cost_discount": 0,
+          "cost_total": 1.6,
+          "cost": 1.6,
+          "currency": "USD",
+          "auth_method_structured": { "detail": "Key 1", "api_key_id": "fk_key_a" }
+        },
+        {
+          "endpoint_id": "fal-ai/example-model",
+          "unit": "image",
+          "quantity": 20,
+          "unit_price": 0.025,
+          "percent_discount": null,
+          "cost_subtotal": 0.5,
+          "cost_discount": 0,
+          "cost_total": 0.5,
+          "cost": 0.5,
+          "currency": "USD",
+          "auth_method_structured": { "detail": "fk-member", "login_username": "fk-member" }
+        }
+      ]
+    }
+  ]
+}

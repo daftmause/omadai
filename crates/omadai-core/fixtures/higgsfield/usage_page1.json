@@ -1,0 +1,43 @@
+{
+  "time_series": [
+    {
+      "bucket": "2026-10-02T00:00:00Z",
+      "results": [
+        {
+          "model": "higgsfield-ai/soul/v2/standard",
+          "unit": "generation",
+          "quantity": "10",
+          "unit_price": "0.0940",
+          "cost": "0.9400",
+          "currency": "USD",
+          "auth_method": "fk-key-id-0001"
+        },
+        {
+          "model": "higgsfield-ai/dop/standard",
+          "unit": "generation",
+          "quantity": "1",
+          "unit_price": "0.5000",
+          "cost": "0.5000",
+          "currency": "USD",
+          "auth_method": "fk-key-id-0001"
+        },
+        {
+          "model": "higgsfield-ai/soul/v2/standard",
+          "unit": "generation",
+          "quantity": "2",
+          "unit_price": "0.0940",
+          "cost": "0.1880",
+          "currency": "USD",
+          "auth_method": "fk-key-id-0002"
+        }
+      ]
+    },
+    {
+      "bucket": "2026-10-03T00:00:00Z",
+      "results": []
+    }
+  ],
+  "total": 3,
+  "page": 1,
+  "limit": 2
+}

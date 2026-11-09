@@ -1,0 +1,7 @@
+{
+  "type": "error",
+  "error": {
+    "type": "permission_error",
+    "message": "This key ({KEY}) cannot use the Admin API for this organization."
+  }
+}
