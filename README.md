@@ -8,13 +8,27 @@ Platforms: OpenAI, Anthropic, fal.ai, xAI, Higgsfield, BytePlus, Flux, Fish Audi
 
 ## Install on Omarchy
 
-There is no package yet, so both halves come from this checkout:
+The binary comes from the `omadai-git` AUR package and the plugin from Omarchy's own installer:
 
-1. Build the binary with `bin/omadai build` and put `target/release/omadai` on your `PATH`. The
-   plugin calls `omadai` and shows "omadai is not installed" when it cannot find it.
-2. Install the plugin with `bin/omadai plugin-dev`, then run `omarchy-restart-shell`.
+1. Install the binary with `yay -S omadai-git`. The plugin calls `omadai` and shows "omadai is not
+   installed" when it cannot find it.
+2. Install the plugin with `omarchy plugin add https://github.com/daftmause/omadai.git --enable`.
 3. Add a key per platform with `omadai key add <platform>`, or from the app window, which opens a
    terminal prompt. The key is checked once and stored in the system keyring.
+
+To update, run `yay -S --rebuild omadai-git` and `omarchy plugin update daftmause.omadai` together,
+then `omarchy-restart-shell`. Omarchy's own update does neither. `--rebuild` builds the current
+HEAD instead of reusing a cached build of the same package version.
+
+The plugin directory is a full clone that the shell watches, so never build there.
+
+The two ways of installing the plugin cannot share one install. Where `bin/omadai plugin-dev`
+installed it earlier, run `omarchy plugin remove daftmause.omadai` before `omarchy plugin add`. To
+switch the other way, run the same remove first, since `plugin-dev` refuses to replace a git
+checkout.
+
+To build from source instead, run `bin/omadai build` in a checkout, put `target/release/omadai` on
+your `PATH`, install the plugin with `bin/omadai plugin-dev` and run `omarchy-restart-shell`.
 
 `omadai` with no arguments prints its commands. `bin/omadai` is a different tool, the repository's
 own development CLI; with no arguments it prints its verbs.

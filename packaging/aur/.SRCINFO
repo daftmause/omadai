@@ -1,0 +1,22 @@
+pkgbase = omadai-git
+	pkgdesc = AI API spend in dollars, per platform and per key, for the Omarchy shell
+	pkgver = 0.1.0.r1.g9232cc3
+	pkgrel = 1
+	url = https://github.com/daftmause/omadai
+	arch = x86_64
+	license = MIT
+	makedepends = cargo
+	makedepends = git
+	depends = glibc
+	depends = libgcc
+	depends = org.freedesktop.secrets
+	optdepends = xdg-utils: Gemini sign-in
+	optdepends = wl-clipboard: Copy in the error log
+	provides = omadai
+	conflicts = omadai
+	options = !lto
+	options = !debug
+	source = git+https://github.com/daftmause/omadai.git
+	sha256sums = SKIP
+
+pkgname = omadai-git

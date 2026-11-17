@@ -1772,8 +1772,8 @@ Panel {
           width: parent.width
           spacing: Style.space(6)
 
-          Line { text: "omadai is not installed · build it from the omadai checkout and put target/release/omadai on PATH:"; color: root.foreground }
-          Line { text: "bin/omadai build"; font.bold: true; color: root.foreground; font.pixelSize: Style.font.body }
+          Line { text: "omadai is not installed · install it from the AUR:"; color: root.foreground }
+          Line { text: "yay -S omadai-git"; font.bold: true; color: root.foreground; font.pixelSize: Style.font.body }
         }
 
         Column {
@@ -2131,8 +2131,8 @@ Panel {
               width: parent.width
               spacing: Style.space(6)
 
-              Line { text: "omadai is not installed · build it from the omadai checkout and put target/release/omadai on PATH:"; color: root.foreground }
-              Line { text: "bin/omadai build"; font.bold: true; color: root.foreground; font.pixelSize: Style.font.body }
+              Line { text: "omadai is not installed · install it from the AUR:"; color: root.foreground }
+              Line { text: "yay -S omadai-git"; font.bold: true; color: root.foreground; font.pixelSize: Style.font.body }
             }
 
             Line { visible: text !== ""; text: root.actionError; color: root.urgent }

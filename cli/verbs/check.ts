@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdtempSync, rmSync, symlinkSync } from "node:fs";
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { VerbContext } from "../lib/commands.ts";
@@ -7,13 +7,15 @@ import { typecheck } from "../lib/typecheck.ts";
 
 const STEPS: string[][] = [
   ["cargo", "fmt", "--check"],
-  ["cargo", "clippy", "--workspace", "--all-targets", "--", "-D", "warnings"],
-  ["cargo", "test", "--workspace"],
+  ["cargo", "clippy", "--locked", "--workspace", "--all-targets", "--", "-D", "warnings"],
+  ["cargo", "test", "--locked", "--workspace"],
 ];
 
 export default async function run({ root }: VerbContext): Promise<number> {
   const typed = typecheck(root);
   if (typed !== 0) return typed;
+  const srcinfo = checkSrcinfo(root);
+  if (srcinfo !== 0) return srcinfo;
   for (const step of STEPS) {
     const status = runCommand(step, root);
     if (status !== 0) return status;
@@ -21,6 +23,36 @@ export default async function run({ root }: VerbContext): Promise<number> {
   const validated = validatePlugin(root);
   if (validated !== 0) return validated;
   return lintQml(root);
+}
+
+// Inlined rather than imported from the aur verb, which does not ship, so the publish gate's staged copy runs it too.
+function checkSrcinfo(root: string): number {
+  const dir = join(root, "packaging", "aur");
+  let printed: string;
+  try {
+    const result = Bun.spawnSync(["makepkg", "--printsrcinfo"], { cwd: dir, stdin: "ignore", stdout: "pipe", stderr: "inherit" });
+    if (result.exitCode !== 0) {
+      console.error(`check: makepkg --printsrcinfo failed in ${dir}`);
+      return 1;
+    }
+    printed = result.stdout.toString();
+  } catch (error) {
+    console.error(`check: cannot run makepkg (pacman), so packaging/aur/.SRCINFO went unchecked: ${(error as Error).message}`);
+    return 1;
+  }
+  let onDisk: string;
+  try {
+    onDisk = readFileSync(join(dir, ".SRCINFO"), "utf8");
+  } catch {
+    console.error("check: packaging/aur/.SRCINFO is missing; write it with makepkg --printsrcinfo > .SRCINFO in packaging/aur");
+    return 1;
+  }
+  if (printed !== onDisk) {
+    console.error("check: packaging/aur/.SRCINFO differs from makepkg --printsrcinfo; regenerate it with makepkg --printsrcinfo > .SRCINFO in packaging/aur");
+    return 1;
+  }
+  console.log("check: packaging/aur/.SRCINFO matches the PKGBUILD");
+  return 0;
 }
 
 const QMLLINT = "/usr/lib/qt6/bin/qmllint";

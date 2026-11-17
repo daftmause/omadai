@@ -1,0 +1,52 @@
+pkgname=omadai-git
+_pkgname=omadai
+pkgver=0.1.0.r1.g9232cc3
+pkgrel=1
+pkgdesc='AI API spend in dollars, per platform and per key, for the Omarchy shell'
+arch=(x86_64)
+url=https://github.com/daftmause/omadai
+license=(MIT)
+depends=(glibc libgcc org.freedesktop.secrets)
+makedepends=(cargo git)
+optdepends=(
+  'xdg-utils: Gemini sign-in'
+  'wl-clipboard: Copy in the error log'
+)
+provides=(omadai)
+conflicts=(omadai)
+source=("git+https://github.com/daftmause/omadai.git")
+sha256sums=(SKIP)
+# makepkg's -flto=auto makes ring's C objects GCC bitcode that rust-lld cannot link (undefined ring_core_* symbols).
+# The release profile strips the binary itself, so a debug package would hold a 3.5 KB file and no symbols.
+options=(!lto !debug)
+
+pkgver() {
+  cd "$_pkgname"
+  local version
+  version=$(sed -n '/^\[workspace\.package\]/,/^\[/s/^version = "\(.*\)"$/\1/p' Cargo.toml)
+  printf '%s.r%s.g%s' "$version" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+prepare() {
+  cd "$_pkgname"
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/^host: //p')"
+}
+
+build() {
+  cd "$_pkgname"
+  export CARGO_TARGET_DIR=target
+  cargo build --frozen --release -p omadai
+}
+
+check() {
+  cd "$_pkgname"
+  export CARGO_TARGET_DIR=target
+  # Debug profile only: the tests build a fake-keystore omadai, which must not land at target/release/omadai.
+  cargo test --frozen --workspace
+}
+
+package() {
+  cd "$_pkgname"
+  install -Dm755 target/release/omadai "$pkgdir/usr/bin/omadai"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

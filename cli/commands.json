@@ -45,7 +45,7 @@
       "examples": [
         "bin/omadai check"
       ],
-      "summary": "Static and test gate for the Rust workspace and the plugin: typecheck the CLI, then cargo fmt --check, cargo clippy --workspace --all-targets -- -D warnings, cargo test --workspace, and omarchy-plugin-validate on a temporary directory holding only manifest.json and Panel.qml (the repository root holds node_modules symlinks the validator refuses), then /usr/lib/qt6/bin/qmllint on Panel.qml, with a temporary import directory whose qs entry links to /usr/share/omarchy/shell so the qs.Commons and qs.Ui imports resolve, since the validator checks only the manifest; installs nothing and stops at the first failing step. apps/macos/src-tauri is outside the workspace and is not checked."
+      "summary": "Static and test gate for the Rust workspace, the plugin and the AUR package: typecheck the CLI, then fail where packaging/aur/.SRCINFO on disk differs from makepkg --printsrcinfo run in packaging/aur, then cargo fmt --check, cargo clippy --locked --workspace --all-targets -- -D warnings, cargo test --locked --workspace, and omarchy-plugin-validate on a temporary directory holding only manifest.json and Panel.qml (the repository root holds node_modules symlinks the validator refuses), then /usr/lib/qt6/bin/qmllint on Panel.qml, with a temporary import directory whose qs entry links to /usr/share/omarchy/shell so the qs.Commons and qs.Ui imports resolve, since the validator checks only the manifest; installs nothing and stops at the first failing step. apps/macos/src-tauri is outside the workspace and is not checked."
     },
     {
       "name": "plugin-dev",
